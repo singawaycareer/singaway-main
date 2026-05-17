@@ -89,7 +89,7 @@ export const Route = createFileRoute('/')({
       },
       {
         name: 'twitter:image',
-        content: 'https://singawaycareer.com/logo.webp',
+        content: 'https://singawaycareer.com/og-image.jpg',
       },
     ],
 
