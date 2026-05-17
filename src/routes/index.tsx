@@ -23,11 +23,10 @@ const websiteJsonLd = {
 
 export const Route = createFileRoute('/')({
   head: () => ({
+    title:
+      'Singaway — Singapore Jobs, Work Permits & Study Visa Consultancy',
+
     meta: [
-      {
-        title:
-          'Singaway — Singapore Jobs, Work Permits & Study Visa Consultancy',
-      },
       {
         name: 'description',
         content:
@@ -57,12 +56,12 @@ export const Route = createFileRoute('/')({
         content: 'https://singawaycareer.com/og-image.jpg',
       },
       {
-        property: 'og:image:type',
-        content: 'image/jpeg',
+        property: 'og:image:secure_url',
+        content: 'https://singawaycareer.com/og-image.jpg',
       },
       {
-        name: 'twitter:image',
-        content: 'https://singawaycareer.com/og-image.jpg',
+        property: 'og:image:type',
+        content: 'image/jpeg',
       },
       {
         property: 'og:image:width',
@@ -73,7 +72,7 @@ export const Route = createFileRoute('/')({
         content: '630',
       },
 
-      // Twitter / WhatsApp / LinkedIn Preview
+      // Twitter / WhatsApp / LinkedIn
       {
         name: 'twitter:card',
         content: 'summary_large_image',
@@ -101,7 +100,7 @@ export const Route = createFileRoute('/')({
     ],
 
     scripts: [
-      // JSON-LD Schema
+      // Structured Data
       {
         type: 'application/ld+json',
         children: JSON.stringify(websiteJsonLd),
@@ -111,7 +110,8 @@ export const Route = createFileRoute('/')({
       {
         children: `
           !function(f,b,e,v,n,t,s)
-          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          {if(f.fbq)return;
+          n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
           if(!f._fbq)f._fbq=n;
           n.push=n;
@@ -123,7 +123,7 @@ export const Route = createFileRoute('/')({
           t.src=v;
           s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}
-          (window, document, 'script',
+          (window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
 
           fbq('init', 'YOUR_PIXEL_ID');
@@ -148,7 +148,6 @@ function Index() {
       <FAQ />
       <Contact />
 
-      {/* Floating WhatsApp Action Trigger */}
       <WhatsAppButton />
     </main>
   )
