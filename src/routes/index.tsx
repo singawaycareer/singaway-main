@@ -12,7 +12,7 @@ import { Contact } from "@/components/site/Contact";
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Sentara",
+  "name": "Singaway",
   "url": "/",
   "potentialAction": {
     "@type": "SearchAction",
@@ -24,19 +24,19 @@ const websiteJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sentara — Singapore Jobs, Work Permits & Study Visa Consultancy" },
+      { title: "Singaway — Singapore Jobs, Work Permits & Study Visa Consultancy" },
       {
         name: "description",
         content:
           "Trusted Singapore career consultancy. Work permits, S Pass, Employment Pass, study visa and overseas placement support — end-to-end.",
       },
-      { property: "og:title", content: "Sentara — Singapore Career Consultancy" },
+      { property: "og:title", content: "Singaway — Singapore Career Consultancy" },
       {
         property: "og:description",
         content: "Singapore jobs, work permits and study visa guidance you can trust.",
       },
       { property: "og:url", content: "/" },
-      { name: "twitter:title", content: "Sentara — Singapore Career Consultancy" },
+      { name: "twitter:title", content: "Singaway — Singapore Career Consultancy" },
       {
         name: "twitter:description",
         content: "Singapore jobs, work permits and study visa guidance you can trust.",

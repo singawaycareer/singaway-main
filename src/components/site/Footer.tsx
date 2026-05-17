@@ -44,7 +44,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Sentara Consultancy. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Singaway Consultancy. All rights reserved.</p>
           <p>Singapore • Overseas Placement & Visa Specialists</p>
         </div>
       </div>
