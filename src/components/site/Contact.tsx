@@ -54,12 +54,20 @@ export function Contact() {
               </span>
               singawaycareer@gmail.com
             </a>
-            <p className="flex items-center gap-3 text-foreground/90">
-              <span className="grid h-9 w-9 place-items-center rounded-xl border border-border">
-                <MapPin className="h-4 w-4" />
-              </span>
-              Raffles Place, Singapore
-            </p>
+            {/* TODO: make the address clickable and show location  */}
+
+            <a
+              href="https://www.google.com/maps/dir//SINGAWAY+TRADE+AND+TEST+CENTRE+PVT.+LTD.,+4th+Floor,+MOTIAZ+ROYAL+BUSINESS+PARK,+404,+Zirakpur,+Punjab+140603/@28.5900635,77.2290188,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x390febe6746fe86b:0x18af830c46df0681!2m2!1d76.8247521!2d30.6329049?hl=en-in&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+            >
+              <p className="flex items-center gap-3 text-foreground/90">
+                <span className="grid h-9 w-9 place-items-center rounded-xl border border-border cursor-pointer">
+                  <MapPin className="h-4 w-4" />
+                </span>
+                #404, 4th Floor, MOTIAZ ROYAL BUSINESS PARK, Zirakpur, Punjab
+                140603
+              </p>
+            </a>
           </div>
         </div>
 

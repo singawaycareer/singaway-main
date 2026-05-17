@@ -4,7 +4,7 @@ import { Plus } from "lucide-react";
 import { Section, SectionHeader } from "./Section";
 
 const faqs = [
-  { q: "How long does the placement process take?", a: "Most candidates are placed within 4–10 weeks depending on the role, documentation and visa category." },
+  { q: "How long does the placement process take?", a: "Most candidates are placed within 2-4 weeks depending on the role, documentation and visa category." },
   { q: "What documents are needed?", a: "A valid passport, recent photographs, education certificates, work experience letters and any role-specific certifications." },
   { q: "Do you provide work permits and S Pass support?", a: "Yes — we handle the full work permit, S Pass and Employment Pass process in coordination with the employer." },
   { q: "Can you help with study visas to Singapore?", a: "Absolutely. From shortlisting universities and admissions to preparing the student visa file." },

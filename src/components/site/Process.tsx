@@ -6,8 +6,8 @@ const steps = [
   { n: "02", t: "Profile Review", d: "We assess fit and shortlist opportunities." },
   { n: "03", t: "Job or Study Path", d: "Personalized guidance & roadmap." },
   { n: "04", t: "Documentation", d: "We prepare everything you need." },
-  { n: "06", t: "Visa / Permit", d: "Submission and tracking through approval." },
-  { n: "07", t: "Singapore Placement", d: "Arrival, onboarding and aftercare." },
+  { n: "05", t: "Visa / Permit", d: "Submission and tracking through approval." },
+  { n: "06", t: "Singapore Placement", d: "Arrival, onboarding and aftercare." },
 ];
 
 export function Process() {
@@ -22,11 +22,11 @@ export function Process() {
         title="A clear path from consultation to Singapore."
       />
 
-      {/* Centered layout wrapper with mobile side-padding padding adjustment */}
-      <div className="relative mt-14 mx-auto max-w-6xl pl-8 md:pl-0">
+      {/* Responsive layout wrapper with calculated alignment tracks */}
+      <div className="relative mt-14 mx-auto max-w-6xl pl-10 md:pl-0">
         
         {/* Animated Connecting Line - Horizontal (Desktop) */}
-        <div className="hairline absolute left-0 right-0 top-6 hidden h-[2px] bg-border md:block overflow-hidden">
+        <div className="absolute left-0 right-0 top-[7px] hidden h-[2px] bg-border md:block overflow-hidden">
           <motion.div
             className="h-full bg-emerald-500 origin-left"
             initial={{ scaleX: 0 }}
@@ -37,7 +37,7 @@ export function Process() {
         </div>
 
         {/* Animated Connecting Line - Vertical (Mobile/Tablet) */}
-        <div className="absolute left-3 top-3 bottom-3 w-[2px] bg-border md:hidden overflow-hidden">
+        <div className="absolute left-[17px] top-2 bottom-2 w-[2px] bg-border md:hidden overflow-hidden">
           <motion.div
             className="w-full bg-emerald-500 origin-top h-full"
             initial={{ scaleY: 0 }}
@@ -47,8 +47,8 @@ export function Process() {
           />
         </div>
 
-        {/* Clean responsive grid alignment (1 column on mobile, 6 columns on desktop) */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-6 md:gap-3">
+        {/* Responsive Grid System */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-6 md:gap-4">
           {steps.map((s, i) => {
             const currentStepDelay = i * stepDuration;
 
@@ -59,10 +59,10 @@ export function Process() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, delay: currentStepDelay }}
-                className="relative"
+                className="relative pt-1 md:pt-8 col-span-1 flex flex-col"
               >
-                {/* Animated Dot Indicator - Responsive position tracking */}
-                <div className="absolute left-[-25px] top-[22px] h-3 w-3 rounded-full border border-border bg-background md:relative md:left-auto md:top-auto md:mb-4 md:-translate-y-[7px] overflow-visible">
+                {/* Precision Dot Indicator (Perfectly centered on line axes) */}
+                <div className="absolute left-[-31px] top-[22px] h-4 w-4 rounded-full border border-border bg-background md:top-0 md:left-6 z-30">
                   {/* Active Green Dot Border Overlay */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
@@ -73,7 +73,7 @@ export function Process() {
                   />
                   
                   {/* Default Inner Dot */}
-                  <div className="absolute inset-0 m-auto h-1.5 w-1.5 rounded-full bg-foreground z-20" />
+                  <div className="absolute inset-0 m-auto h-2 w-2 rounded-full bg-foreground z-20" />
                   
                   {/* Active Green Inner Dot Overlay */}
                   <motion.div
@@ -81,12 +81,12 @@ export function Process() {
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true, margin: "-60px" }}
                     transition={{ delay: currentStepDelay, duration: 0.2 }}
-                    className="absolute inset-0 m-auto h-1.5 w-1.5 rounded-full bg-emerald-500 z-30"
+                    className="absolute inset-0 m-auto h-2 w-2 rounded-full bg-emerald-500 z-30"
                   />
                 </div>
 
                 {/* Step Card */}
-                <div className="relative rounded-2xl border border-border bg-card p-4 overflow-hidden h-full">
+                <div className="relative rounded-2xl border border-border bg-card p-5 overflow-hidden h-full flex-1">
                   {/* Active Green Card Border Overlay */}
                   <motion.div
                     initial={{ opacity: 0 }}
@@ -96,11 +96,11 @@ export function Process() {
                     className="absolute inset-0 rounded-2xl border border-emerald-500 pointer-events-none z-10"
                   />
 
-                  {/* Content (Z-indexed above overlays) */}
+                  {/* Content */}
                   <div className="relative z-20">
-                    <p className="font-display text-xs text-muted-foreground">{s.n}</p>
+                    <p className="font-display text-xs font-medium text-muted-foreground">{s.n}</p>
                     <p className="mt-2 font-display text-base font-semibold leading-snug">{s.t}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{s.d}</p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{s.d}</p>
                   </div>
                 </div>
               </motion.div>

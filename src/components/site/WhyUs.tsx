@@ -6,7 +6,7 @@ const items = [
   { icon: Eye, title: "Transparent Process", desc: "Clear timelines, fees and milestones — always." },
   { icon: Compass, title: "Trusted Guidance", desc: "Personal consultants from application to arrival." },
   { icon: FileCheck2, title: "Fast Documentation", desc: "Streamlined paperwork with quick approvals." },
-  { icon: TrendingUp, title: "High Success Rate", desc: "96%+ placement rate across active candidates." },
+  { icon: TrendingUp, title: "High Success Rate", desc: "98%+ placement rate across active candidates." },
   { icon: LifeBuoy, title: "End-to-End Support", desc: "Pre-departure, arrival and onboarding support." },
 ];
 

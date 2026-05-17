@@ -6,7 +6,7 @@ import logo from "../../assets/logo.jpeg"
 const links = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
-  { label: "Jobs", href: "#jobs" },
+  // { label: "Jobs", href: "#jobs" },
   { label: "Study Visa", href: "#study" },
   { label: "Process", href: "#process" },
   { label: "Contact", href: "#contact" },

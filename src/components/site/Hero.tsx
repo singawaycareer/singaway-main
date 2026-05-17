@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Phone, ShieldCheck, Users, GraduationCap, BadgeCheck } from "lucide-react";
-import skyline from "@/assets/hero-skyline.jpg";
+import mar from "../../assets/merlion.webp";
 
 
 const fadeUp = {
@@ -35,7 +35,8 @@ export function Hero() {
         >
           Build Your Future
           <br />
-          <span className="text-muted-foreground">in </span>Singapore.
+          <span className="text-muted-foreground ">in </span> 
+          <span className="text-red-500 ">Singapore.</span>
         </motion.h1>
 
         <motion.p
@@ -76,13 +77,13 @@ export function Hero() {
         >
           <div className="relative overflow-hidden rounded-[28px] border border-border bg-surface shadow-luxe">
             <img
-              src={skyline}
+              src={mar}
               alt="Singapore Marina Bay skyline"
               width={1920}
               height={1080}
               className="h-[340px] w-full object-cover sm:h-[520px]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
+            <div className="absolute inset-0" />
 
             {/* Floating glass card – left */}
             <motion.div
@@ -91,7 +92,7 @@ export function Hero() {
               transition={{ delay: 0.7, duration: 0.6 }}
               className="absolute left-4 top-4 hidden rounded-2xl border border-border glass-strong p-3 shadow-luxe sm:left-6 sm:top-6 sm:flex"
             >
-             <p>Your Sucess Our Priority</p>
+             <p className="text-md text-accent-foreground font-semibold">Your Success , Our Priority</p>
             </motion.div>
 
             {/* Floating glass card – right */}

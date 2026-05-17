@@ -1,4 +1,4 @@
-import { Instagram, Linkedin, Facebook } from "lucide-react";
+import { Instagram, Facebook } from "lucide-react";
 import logo from "../../assets/logo.jpeg";
 
 const cols = [
@@ -23,8 +23,8 @@ export function Footer() {
               Trusted Singapore career consultancy & overseas placement specialists.
             </p>
             <div className="mt-6 flex gap-2">
-              {[Instagram, Linkedin, Facebook].map((Icon, i) => (
-                <a key={i} href="#" aria-label="social" className="grid h-9 w-9 place-items-center rounded-full border border-border hover:bg-secondary">
+              {[Instagram, Facebook].map((Icon, i) => (
+                <a key={i} target="_blank" href={`https://www.${i==0?'instagram':'facebook'}.com/${'singawaycareer'}`} aria-label="social" className="grid h-9 w-9 place-items-center rounded-full border border-border hover:bg-secondary">
                   <Icon className="h-4 w-4" />
                 </a>
               ))}
@@ -41,11 +41,6 @@ export function Footer() {
               </ul>
             </div>
           ))}
-        </div>
-
-        <div className="mt-14 flex flex-col items-start justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Singaway Consultancy. All rights reserved.</p>
-          <p>Singapore • Overseas Placement & Visa Specialists</p>
         </div>
       </div>
     </footer>

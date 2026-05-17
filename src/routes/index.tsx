@@ -8,6 +8,7 @@ import { Jobs } from "@/components/site/Jobs";
 import { StudyVisa } from "@/components/site/StudyVisa";
 import { FAQ } from "@/components/site/FAQ";
 import { Contact } from "@/components/site/Contact";
+import { WhatsAppButton } from "@/components/site/Whatsapp";
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
@@ -57,7 +58,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground relative">
       <Hero />
       <Services />
       <WhySingapore />
@@ -66,6 +67,9 @@ function Index() {
       <StudyVisa />
       <FAQ />
       <Contact />
+      
+      {/* Floating WhatsApp Action Trigger */}
+      <WhatsAppButton />
     </main>
   );
 }
