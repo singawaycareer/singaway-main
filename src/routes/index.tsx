@@ -54,7 +54,15 @@ export const Route = createFileRoute('/')({
       },
       {
         property: 'og:image',
-        content: 'https://singawaycareer.com/logo.jpeg',
+        content: 'https://singawaycareer.com/og-image.jpg',
+      },
+      {
+        property: 'og:image:type',
+        content: 'image/jpeg',
+      },
+      {
+        name: 'twitter:image',
+        content: 'https://singawaycareer.com/og-image.jpg',
       },
       {
         property: 'og:image:width',
@@ -65,7 +73,7 @@ export const Route = createFileRoute('/')({
         content: '630',
       },
 
-      // Twitter
+      // Twitter / WhatsApp / LinkedIn Preview
       {
         name: 'twitter:card',
         content: 'summary_large_image',
@@ -81,14 +89,19 @@ export const Route = createFileRoute('/')({
       },
       {
         name: 'twitter:image',
-        content: 'https://singawaycareer.com/logo.jpeg',
+        content: 'https://singawaycareer.com/logo.webp',
       },
     ],
 
-    links: [{ rel: 'canonical', href: 'https://singawaycareer.com' }],
+    links: [
+      {
+        rel: 'canonical',
+        href: 'https://singawaycareer.com',
+      },
+    ],
 
     scripts: [
-      // JSON-LD
+      // JSON-LD Schema
       {
         type: 'application/ld+json',
         children: JSON.stringify(websiteJsonLd),
@@ -110,7 +123,7 @@ export const Route = createFileRoute('/')({
           t.src=v;
           s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}
-          (window, document,'script',
+          (window, document, 'script',
           'https://connect.facebook.net/en_US/fbevents.js');
 
           fbq('init', 'YOUR_PIXEL_ID');
