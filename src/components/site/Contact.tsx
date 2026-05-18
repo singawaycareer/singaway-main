@@ -1,8 +1,9 @@
-import { useState } from 'react'
-
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { Section } from './Section'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const services = [
   'Singapore Work Permit',
@@ -13,11 +14,27 @@ const services = [
   'Job Placement',
 ]
 
+type FormData = {
+  name: string
+  phone: string
+  email: string
+  service: string
+  message: string
+}
+
 export function Contact() {
-  const [sent, setSent] = useState(false)
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSent(true)
+  const [sent , setSent] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+   
+  } = useForm<FormData>()
+
+  const onSubmit = async () => {
+   
+   alert("This functionality will be available soon.You can use whatsapp to connect with us.");
+  
   }
 
   return (
@@ -27,9 +44,11 @@ export function Contact() {
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Contact
           </p>
+
           <h2 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
             Start your Singapore journey.
           </h2>
+
           <p className="mt-4 max-w-md text-muted-foreground">
             Tell us about your goals. A consultant will reach out within one
             business day.
@@ -43,8 +62,10 @@ export function Contact() {
               <span className="grid h-9 w-9 place-items-center rounded-xl border border-border">
                 <Phone className="h-4 w-4" />
               </span>
+
               +91 78887 27497
             </a>
+
             <a
               className="flex items-center gap-3 text-foreground/90 hover:text-foreground"
               href="mailto:singawaycareer@gmail.com"
@@ -52,9 +73,9 @@ export function Contact() {
               <span className="grid h-9 w-9 place-items-center rounded-xl border border-border">
                 <Mail className="h-4 w-4" />
               </span>
+
               singawaycareer@gmail.com
             </a>
-            {/* TODO: make the address clickable and show location  */}
 
             <a
               href="https://www.google.com/maps/dir//SINGAWAY+TRADE+AND+TEST+CENTRE+PVT.+LTD.,+4th+Floor,+MOTIAZ+ROYAL+BUSINESS+PARK,+404,+Zirakpur,+Punjab+140603/@28.5900635,77.2290188,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x390febe6746fe86b:0x18af830c46df0681!2m2!1d76.8247521!2d30.6329049?hl=en-in&entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D"
@@ -64,6 +85,7 @@ export function Contact() {
                 <span className="grid h-9 w-9 place-items-center rounded-xl border border-border cursor-pointer">
                   <MapPin className="h-4 w-4" />
                 </span>
+
                 #404, 4th Floor, MOTIAZ ROYAL BUSINESS PARK, Zirakpur, Punjab
                 140603
               </p>
@@ -76,35 +98,39 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="lg:col-span-3 rounded-3xl border border-border glass-strong p-6 shadow-luxe sm:p-8"
         >
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field
               label="Full Name"
-              name="name"
               placeholder="Your full name"
               required
+              {...register('name')}
             />
+
             <Field
-              label="Phone / WhatsApp "
-              name="phone"
+              label="Phone / WhatsApp"
               placeholder="+91 ..."
               required
+              {...register('phone')}
             />
+
             <Field
               label="Email"
-              name="email"
               type="email"
               placeholder="you@email.com"
               required
+              {...register('email')}
             />
+
             <div>
               <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
                 Interested Service
               </label>
+
               <select
-                name="service"
+                {...register('service')}
                 className="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm outline-none focus:border-foreground"
               >
                 {services.map((s) => (
@@ -112,12 +138,14 @@ export function Contact() {
                 ))}
               </select>
             </div>
+
             <div className="sm:col-span-2">
               <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
                 Message
               </label>
+
               <textarea
-                name="message"
+                {...register('message')}
                 rows={4}
                 placeholder="Tell us about your background and goals…"
                 className="w-full rounded-xl border border-border bg-background p-3 text-sm outline-none focus:border-foreground"
@@ -130,8 +158,10 @@ export function Contact() {
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
           >
             {sent ? "Thank you — we'll be in touch" : 'Send enquiry'}
+
             <ArrowUpRight className="h-4 w-4" />
           </button>
+
           <p className="mt-3 text-xs text-muted-foreground">
             By submitting, our team will contact you as soon as possible to
             guide you further. We’re here to help at every step.
@@ -146,11 +176,13 @@ function Field(
   props: React.InputHTMLAttributes<HTMLInputElement> & { label: string },
 ) {
   const { label, ...rest } = props
+
   return (
     <div>
       <label className="mb-1.5 block text-xs font-medium text-muted-foreground">
         {label}
       </label>
+
       <input
         {...rest}
         className="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm outline-none transition-colors focus:border-foreground"
