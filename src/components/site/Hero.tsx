@@ -23,7 +23,7 @@ export function Hero() {
           className="mx-auto inline-flex w-full justify-center"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-foreground" />
+            <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
             Singapore Career & Visa Consultancy
           </div>
         </motion.div>
