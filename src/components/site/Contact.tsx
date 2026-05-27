@@ -3,7 +3,8 @@ import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { Section } from './Section'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'
+import axios from 'axios'
+import { toast } from 'sonner'
 
 const services = [
   'Singapore Work Permit',
@@ -31,10 +32,21 @@ export function Contact() {
    
   } = useForm<FormData>()
 
-  const onSubmit = async () => {
+  const onSubmit = async (data: FormData) => {
    
-   alert("This functionality will be available soon.You can use whatsapp to connect with us.");
-  
+ 
+   const response = await axios.post(`${import.meta.env.VITE_API_URL}/send-email`, data);
+   
+   if(response.status === 200){
+    setSent(true)
+    toast.success('Email sent successfully')
+    alert('Email sent successfully')
+   }
+   else{
+    setSent(false)
+    toast.error('Email sending failed')
+    alert('Email sending failed')
+   }
   }
 
   return (
