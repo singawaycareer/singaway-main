@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <section id="home" className="relative overflow-hidden pt-28 sm:pt-36">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-b from-secondary to-transparent blur-3xl opacity-70" />
+       <div className="absolute left-1/2 top-0 h-[600px] w-[1100px] -translate-x-1/2 rounded-full bg-gradient-to-b from-secondary to-transparent blur-3xl opacity-70" />
       </div>
 
       <div className="mx-auto max-w-6xl px-5">
