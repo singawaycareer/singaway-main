@@ -4,7 +4,7 @@ import { Section } from './Section'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios'
-import { toast } from 'sonner'
+import { Ring } from '@/components/ring'
 
 const services = [
   'Singapore Work Permit',
@@ -24,29 +24,34 @@ type FormData = {
 }
 
 export function Contact() {
-  const [sent , setSent] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-   
-  } = useForm<FormData>()
+  const { register, handleSubmit } = useForm<FormData>()
 
   const onSubmit = async (data: FormData) => {
-   
- 
-   const response = await axios.post(`${import.meta.env.BASE_URL}/send-email`, data);
-   
-   if(response.status === 200){
-    setSent(true)
-    toast.success('Email sent successfully')
-    alert('Email sent successfully')
-   }
-   else{
-    setSent(false)
-    toast.error('Email sending failed')
-    alert('Email sending failed')
-   }
+    if (sent || loading) return
+
+    try {
+      setLoading(true)
+
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/send-email`,
+        data,
+      )
+
+      if (response.status === 200) {
+        setSent(true)
+        alert('Email sent successfully')
+      } else {
+        alert('Email sending failed')
+      }
+    } catch (error) {
+      console.log(error)
+      alert('Something went wrong')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -74,7 +79,6 @@ export function Contact() {
               <span className="grid h-9 w-9 place-items-center rounded-xl border border-border">
                 <Phone className="h-4 w-4" />
               </span>
-
               +91 78887 27497
             </a>
 
@@ -85,7 +89,6 @@ export function Contact() {
               <span className="grid h-9 w-9 place-items-center rounded-xl border border-border">
                 <Mail className="h-4 w-4" />
               </span>
-
               singawaycareer@gmail.com
             </a>
 
@@ -97,7 +100,6 @@ export function Contact() {
                 <span className="grid h-9 w-9 place-items-center rounded-xl border border-border cursor-pointer">
                   <MapPin className="h-4 w-4" />
                 </span>
-
                 #404, 4th Floor, MOTIAZ ROYAL BUSINESS PARK, Zirakpur, Punjab
                 140603
               </p>
@@ -118,6 +120,7 @@ export function Contact() {
               label="Full Name"
               placeholder="Your full name"
               required
+              disabled={sent || loading}
               {...register('name')}
             />
 
@@ -125,6 +128,7 @@ export function Contact() {
               label="Phone / WhatsApp"
               placeholder="+91 ..."
               required
+              disabled={sent || loading}
               {...register('phone')}
             />
 
@@ -133,6 +137,7 @@ export function Contact() {
               type="email"
               placeholder="you@email.com"
               required
+              disabled={sent || loading}
               {...register('email')}
             />
 
@@ -142,6 +147,7 @@ export function Contact() {
               </label>
 
               <select
+                disabled={sent || loading}
                 {...register('service')}
                 className="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm outline-none focus:border-foreground"
               >
@@ -159,6 +165,7 @@ export function Contact() {
               <textarea
                 {...register('message')}
                 rows={4}
+                disabled={sent || loading}
                 placeholder="Tell us about your background and goals…"
                 className="w-full rounded-xl border border-border bg-background p-3 text-sm outline-none focus:border-foreground"
               />
@@ -169,9 +176,18 @@ export function Contact() {
             type="submit"
             className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-transform hover:-translate-y-0.5"
           >
-            {sent ? "Thank you — we'll be in touch" : 'Send enquiry'}
+            {loading ? (
+              <>
+                <Ring className="h-4 w-4 animate-spin" />
+                Sending...
+              </>
+            ) : sent ? (
+              "Thank you — we'll be in touch"
+            ) : (
+              'Send enquiry'
+            )}
 
-            <ArrowUpRight className="h-4 w-4" />
+            {!loading && <ArrowUpRight className="h-4 w-4" />}
           </button>
 
           <p className="mt-3 text-xs text-muted-foreground">

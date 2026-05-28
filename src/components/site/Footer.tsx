@@ -1,5 +1,5 @@
 import { Instagram, Facebook } from "lucide-react";
-import logo from "../../assets/logo.jpeg";
+import logo from "@/assets/logo.jpeg";
 
 const cols = [
   { title: "Services", items: ["Work Permit", "S Pass", "Employment Pass", "Study Visa"] },
