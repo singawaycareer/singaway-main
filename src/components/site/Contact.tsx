@@ -35,7 +35,7 @@ export function Contact() {
   const onSubmit = async (data: FormData) => {
    
  
-   const response = await axios.post(`${import.meta.env.VITE_API_URL}/send-email`, data);
+   const response = await axios.post(`${import.meta.env.BASE_URL}/send-email`, data);
    
    if(response.status === 200){
     setSent(true)
