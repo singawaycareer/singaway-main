@@ -2,15 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import { Section, SectionHeader } from "./Section";
-
-const faqs = [
-  { q: "How long does the placement process take?", a: "Most candidates are placed within 2-4 weeks depending on the role, documentation and visa category." },
-  { q: "What documents are needed?", a: "A valid passport, recent photographs, education certificates, work experience letters and any role-specific certifications." },
-  { q: "Do you provide work permits and S Pass support?", a: "Yes — we handle the full work permit, S Pass and Employment Pass process in coordination with the employer." },
-  { q: "Can you help with study visas to Singapore?", a: "Absolutely. From shortlisting universities and admissions to preparing the student visa file." },
-  { q: "Which job categories are available?", a: "Hospitality, cleaning, warehouse, logistics, drivers, retail, factory, kitchen and skilled professional roles." },
-  { q: "What salary range can I expect?", a: "Entry-level work permit roles typically range from S$1,700 to S$2,800 per month plus accommodation/allowances depending on employer." },
-];
+import { FAQS } from "@/lib/seo";
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
@@ -20,7 +12,7 @@ export function FAQ() {
         <SectionHeader eyebrow="FAQ" title="Questions, answered." />
         <div className="lg:col-span-2">
           <div className="overflow-hidden rounded-3xl border border-border bg-card">
-            {faqs.map((f, i) => {
+            {FAQS.map((f, i) => {
               const isOpen = open === i;
               return (
                 <div key={f.q} className={i > 0 ? "border-t border-border" : ""}>

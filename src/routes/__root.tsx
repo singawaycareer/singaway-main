@@ -12,6 +12,13 @@ import {
 import appCss from '../styles.css?url'
 import { Navbar } from '@/components/site/Navbar'
 import { Footer } from '@/components/site/Footer'
+import {
+  buildOrganizationJsonLd,
+  buildRootMeta,
+  DEFAULT_TITLE,
+  jsonLdScript,
+  SITE_URL,
+} from '@/lib/seo'
 
 function NotFoundComponent() {
   return (
@@ -73,54 +80,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   )
 }
 
-const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: 'Singaway',
-  description:
-    'Trusted Singapore career consultancy specializing in work permits, S Pass, Employment Pass, study visas and overseas placement support.',
-  areaServed: { '@type': 'Country', name: 'Singapore' },
-  serviceType:
-    'Career Consultancy, Visa & Immigration Services, Overseas Placement',
-}
-
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
     head: () => ({
-      meta: [
-        { charSet: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'title',
-          content:
-            'Singaway — Singapore Jobs, Work Permits & Study Visa Consultancy',
-        },
-        
-        {
-          name: 'description',
-          content:
-            'Trusted Singapore career consultancy. Work permits, S Pass, Employment Pass, study visa and overseas placement support — end-to-end.',
-        },
-        { name: 'author', content: 'Singaway' },
-        { name: 'robots', content: 'index, follow' },
-        { property: 'og:type', content: 'website' },
-        { property: 'og:site_name', content: 'Singaway' },
-        { property: 'og:locale', content: 'en_SG' },
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:site', content: '@SingawaySG' },
-      ],
+      title: DEFAULT_TITLE,
+      meta: buildRootMeta(),
       links: [
-        {
-          rel: 'stylesheet',
-          href: appCss,
-        },
+        { rel: 'stylesheet', href: appCss },
+        { rel: 'manifest', href: '/site.webmanifest' },
       ],
-      scripts: [
-        {
-          type: 'application/ld+json',
-          children: JSON.stringify(organizationJsonLd),
-        },
-      ],
+      scripts: [jsonLdScript(buildOrganizationJsonLd())],
     }),
     shellComponent: RootShell,
     component: RootComponent,
@@ -134,6 +103,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <link rel="preconnect" href={SITE_URL} />
       </head>
       <body suppressHydrationWarning>
         {children}

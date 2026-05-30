@@ -8,116 +8,28 @@ import { StudyVisa } from '@/components/site/StudyVisa'
 import { FAQ } from '@/components/site/FAQ'
 import { Contact } from '@/components/site/Contact'
 import { WhatsAppButton } from '@/components/site/Whatsapp'
-
-const websiteJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Singaway',
-  url: 'https://singawaycareer.com',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: 'https://singawaycareer.com/?q={search_term_string}',
-    'query-input': 'required name=search_term_string',
-  },
-}
+import {
+  buildBreadcrumbJsonLd,
+  buildFAQPageJsonLd,
+  buildPageMeta,
+  buildServiceListJsonLd,
+  buildWebSiteJsonLd,
+  jsonLdScript,
+} from '@/lib/seo'
 
 export const Route = createFileRoute('/')({
-  head: () => ({
-    title: 'Singaway — Singapore Jobs, Work Permits & Study Visa Consultancy',
-
-    meta: [
-      {
-        name: 'description',
-        content:
-          'Trusted Singapore career consultancy. Work permits, S Pass, Employment Pass, study visa and overseas placement support — end-to-end.',
-      },
-
-      // Open Graph
-      {
-        property: 'og:title',
-        content: 'Singaway — Singapore Career Consultancy',
-      },
-      {
-        property: 'og:description',
-        content:
-          'Singapore jobs, work permits and study visa guidance you can trust.',
-      },
-      {
-        property: 'og:url',
-        content: 'https://singawaycareer.com',
-      },
-      {
-        property: 'og:type',
-        content: 'website',
-      },
-      {
-        property: 'og:image',
-        content: 'https://singawaycareer.com/og-image.jpg',
-      },
-      {
-        property: 'og:image:secure_url',
-        content: 'https://singawaycareer.com/og-image.jpg',
-      },
-      {
-        property: 'og:image:type',
-        content: 'image/jpeg',
-      },
-      {
-        property: 'og:image:width',
-        content: '1200',
-      },
-      {
-        property: 'og:image:height',
-        content: '630',
-      },
-
-      // Twitter / WhatsApp / LinkedIn
-      {
-        name: 'twitter:card',
-        content: 'summary_large_image',
-      },
-      {
-        name: 'twitter:title',
-        content: 'Singaway — Singapore Career Consultancy',
-      },
-      {
-        name: 'twitter:description',
-        content:
-          'Singapore jobs, work permits and study visa guidance you can trust.',
-      },
-      {
-        name: 'twitter:image',
-        content: 'https://singawaycareer.com/og-image.jpg',
-      },
-    ],
-
-    links: [
-      {
-        rel: 'canonical',
-        href: 'https://singawaycareer.com',
-      },
-
-      // Browser Tab Logo / Favicon
-      {
-        rel: 'icon',
-        type: 'image/jpeg',
-        href: '/og-image.jpg',
-      },
-
-      {
-        rel: 'apple-touch-icon',
-        href: '/og-image.jpg',
-      },
-    ],
-
-    scripts: [
-      {
-        type: 'application/ld+json',
-        children: JSON.stringify(websiteJsonLd),
-      },
-    ],
-  }),
-
+  head: () => {
+    const page = buildPageMeta()
+    return {
+      ...page,
+      scripts: [
+        jsonLdScript(buildWebSiteJsonLd()),
+        jsonLdScript(buildFAQPageJsonLd()),
+        jsonLdScript(buildServiceListJsonLd()),
+        jsonLdScript(buildBreadcrumbJsonLd()),
+      ],
+    }
+  },
   component: Index,
 })
 
@@ -132,7 +44,6 @@ function Index() {
       <StudyVisa />
       <FAQ />
       <Contact />
-
       <WhatsAppButton />
     </main>
   )
