@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
-import student from "@/assets/student.jpg";
+const STUDENT_IMAGE = '/images/student.webp'
 import { Section } from "./Section";
 
 const points = [
@@ -22,7 +22,15 @@ export function StudyVisa() {
           transition={{ duration: 0.6 }}
           className="relative overflow-hidden rounded-3xl border border-border"
         >
-          <img src={student} alt="Student in Singapore" loading="lazy" className="h-[420px] w-full object-cover sm:h-[520px]" />
+          <img
+            src={STUDENT_IMAGE}
+            alt="Student in Singapore"
+            loading="lazy"
+            decoding="async"
+            width={640}
+            height={800}
+            className="h-[420px] w-full object-cover sm:h-[520px]"
+          />
           <div className="absolute bottom-4 left-4 right-4 rounded-2xl border border-border glass-strong p-4">
             <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Study in Singapore</p>
             <p className="mt-1 font-display text-lg font-semibold">From application to arrival.</p>

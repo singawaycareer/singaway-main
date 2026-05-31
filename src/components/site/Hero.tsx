@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Phone, ShieldCheck, Users, GraduationCap, BadgeCheck } from "lucide-react";
-import mar from "../../assets/merlion.webp";
+const HERO_IMAGE = '/images/merlion.webp'
 
 
 const fadeUp = {
@@ -77,10 +77,12 @@ export function Hero() {
         >
           <div className="relative overflow-hidden rounded-[28px] border border-border bg-surface shadow-luxe">
             <img
-              src={mar}
+              src={HERO_IMAGE}
               alt="Singapore Marina Bay skyline"
-              width={1920}
-              height={1080}
+              width={1280}
+              height={720}
+              fetchPriority="high"
+              decoding="async"
               className="h-[340px] w-full object-cover sm:h-[520px]"
             />
             <div className="absolute inset-0" />

@@ -1,42 +1,51 @@
+import { lazy, Suspense } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { Hero } from '@/components/site/Hero'
-import { Services } from '@/components/site/Services'
-import { WhySingapore } from '@/components/site/WhySingapore'
-import { WhyUs } from '@/components/site/WhyUs'
-import { Process } from '@/components/site/Process'
-import { StudyVisa } from '@/components/site/StudyVisa'
-import { FAQ } from '@/components/site/FAQ'
-import { Contact } from '@/components/site/Contact'
-import { WhatsAppButton } from '@/components/site/Whatsapp'
-import {
-  buildBreadcrumbJsonLd,
-  buildFAQPageJsonLd,
-  buildPageMeta,
-  buildServiceListJsonLd,
-  buildWebSiteJsonLd,
-  jsonLdScript,
-} from '@/lib/seo'
+import { buildHomePageJsonLd, buildPageMeta, jsonLdScript } from '@/lib/seo'
+
+const Services = lazy(() =>
+  import('@/components/site/Services').then((m) => ({ default: m.Services })),
+)
+const WhySingapore = lazy(() =>
+  import('@/components/site/WhySingapore').then((m) => ({
+    default: m.WhySingapore,
+  })),
+)
+const WhyUs = lazy(() =>
+  import('@/components/site/WhyUs').then((m) => ({ default: m.WhyUs })),
+)
+const Process = lazy(() =>
+  import('@/components/site/Process').then((m) => ({ default: m.Process })),
+)
+const StudyVisa = lazy(() =>
+  import('@/components/site/StudyVisa').then((m) => ({ default: m.StudyVisa })),
+)
+const FAQ = lazy(() =>
+  import('@/components/site/FAQ').then((m) => ({ default: m.FAQ })),
+)
+const Contact = lazy(() =>
+  import('@/components/site/Contact').then((m) => ({ default: m.Contact })),
+)
+const WhatsAppButton = lazy(() =>
+  import('@/components/site/Whatsapp').then((m) => ({
+    default: m.WhatsAppButton,
+  })),
+)
 
 export const Route = createFileRoute('/')({
   head: () => {
     const page = buildPageMeta()
     return {
       ...page,
-      scripts: [
-        jsonLdScript(buildWebSiteJsonLd()),
-        jsonLdScript(buildFAQPageJsonLd()),
-        jsonLdScript(buildServiceListJsonLd()),
-        jsonLdScript(buildBreadcrumbJsonLd()),
-      ],
+      scripts: [jsonLdScript(buildHomePageJsonLd())],
     }
   },
   component: Index,
 })
 
-function Index() {
+function BelowFold() {
   return (
-    <main className="min-h-screen bg-background text-foreground relative">
-      <Hero />
+    <>
       <Services />
       <WhySingapore />
       <WhyUs />
@@ -45,6 +54,17 @@ function Index() {
       <FAQ />
       <Contact />
       <WhatsAppButton />
+    </>
+  )
+}
+
+function Index() {
+  return (
+    <main className="min-h-screen bg-background text-foreground relative">
+      <Hero />
+      <Suspense fallback={null}>
+        <BelowFold />
+      </Suspense>
     </main>
   )
 }

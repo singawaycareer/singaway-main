@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
-import airport from '@/assets/airport.webp'
-import student from '@/assets/student.webp'
-import warehouse from '@/assets/warehouse.webp'
 import { Section, SectionHeader } from './Section'
-import bg from '@/assets/bg.webp'
+
+const IMAGES = {
+  skyline: '/images/bg.webp',
+  warehouse: '/images/warehouse.webp',
+  student: '/images/student.webp',
+  airport: '/images/airport.webp',
+} as const
 
 const benefits = [
   'Better Salary Opportunities',
@@ -32,7 +35,6 @@ export function WhySingapore() {
         desc="A global hub for opportunity — combining career mobility, world-class education and one of the safest, most modern cities in Asia."
       />
 
-      {/* Image collage */}
       <div className="mt-14 grid grid-cols-12 gap-3">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,9 +44,12 @@ export function WhySingapore() {
           className="col-span-12 overflow-hidden rounded-3xl border border-border md:col-span-7"
         >
           <img
-            src={bg}
+            src={IMAGES.skyline}
             loading="lazy"
+            decoding="async"
             alt="Singapore skyline"
+            width={960}
+            height={540}
             className="h-72 w-full object-cover sm:h-[420px]"
           />
         </motion.div>
@@ -55,9 +60,12 @@ export function WhySingapore() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            src={warehouse}
+            src={IMAGES.warehouse}
             loading="lazy"
-            alt="Singapore warehouse"
+            decoding="async"
+            alt="Singapore warehouse jobs"
+            width={640}
+            height={400}
             className="h-44 w-full rounded-3xl border border-border object-cover sm:h-[206px]"
           />
           <motion.img
@@ -65,9 +73,12 @@ export function WhySingapore() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            src={student}
+            src={IMAGES.student}
             loading="lazy"
-            alt="Student on campus"
+            decoding="async"
+            alt="Student on campus in Singapore"
+            width={640}
+            height={400}
             className="h-44 w-full rounded-3xl border border-border object-cover sm:h-[206px]"
           />
           <motion.img
@@ -75,15 +86,17 @@ export function WhySingapore() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            src={airport}
+            src={IMAGES.airport}
             loading="lazy"
-            alt="Singapore warehouse"
+            decoding="async"
+            alt="Singapore airport operations jobs"
+            width={960}
+            height={400}
             className="col-span-2 h-44 w-full rounded-3xl border border-border object-center sm:h-[206px]"
           />
         </div>
       </div>
 
-      {/* Benefits */}
       <div className="mt-12 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {benefits.map((b, i) => (
           <motion.div
@@ -99,7 +112,6 @@ export function WhySingapore() {
         ))}
       </div>
 
-      {/* Animated counters */}
       <div className="mt-10 grid grid-cols-2 divide-x divide-border rounded-3xl border border-border bg-card sm:grid-cols-4">
         {stats.map((s) => (
           <div key={s.v} className="p-6 text-center">

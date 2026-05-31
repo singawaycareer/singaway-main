@@ -3,7 +3,6 @@ import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { Section } from './Section'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import axios from 'axios'
 import { Ring } from '@/components/ring'
 
 const services = [
@@ -35,12 +34,16 @@ export function Contact() {
     try {
       setLoading(true)
 
-      const response = await axios.post(
+      const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/send-email`,
-        data,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        },
       )
 
-      if (response.status === 200) {
+      if (response.ok) {
         setSent(true)
         alert('Email sent successfully')
       } else {

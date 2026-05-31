@@ -1,5 +1,3 @@
-import type { QueryClient } from '@tanstack/react-query'
-import { QueryClientProvider } from '@tanstack/react-query'
 import {
   Outlet,
   Link,
@@ -12,13 +10,7 @@ import {
 import appCss from '../styles.css?url'
 import { Navbar } from '@/components/site/Navbar'
 import { Footer } from '@/components/site/Footer'
-import {
-  buildOrganizationJsonLd,
-  buildRootMeta,
-  DEFAULT_TITLE,
-  jsonLdScript,
-  SITE_URL,
-} from '@/lib/seo'
+import { buildRootMeta, DEFAULT_TITLE } from '@/lib/seo'
 
 function NotFoundComponent() {
   return (
@@ -80,30 +72,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   )
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
-  {
-    head: () => ({
-      title: DEFAULT_TITLE,
-      meta: buildRootMeta(),
-      links: [
-        { rel: 'stylesheet', href: appCss },
-        { rel: 'manifest', href: '/site.webmanifest' },
-      ],
-      scripts: [jsonLdScript(buildOrganizationJsonLd())],
-    }),
-    shellComponent: RootShell,
-    component: RootComponent,
-    notFoundComponent: NotFoundComponent,
-    errorComponent: ErrorComponent,
-  },
-)
+export const Route = createRootRouteWithContext()({
+  head: () => ({
+    title: DEFAULT_TITLE,
+    meta: buildRootMeta(),
+    links: [
+      { rel: 'stylesheet', href: appCss },
+      { rel: 'manifest', href: '/site.webmanifest' },
+      {
+        rel: 'preconnect',
+        href: 'https://api.fontshare.com',
+        crossOrigin: 'anonymous',
+      },
+      { rel: 'preload', href: '/images/merlion.webp', as: 'image', type: 'image/webp' },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
+})
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <HeadContent />
-        <link rel="preconnect" href={SITE_URL} />
       </head>
       <body suppressHydrationWarning>
         {children}
@@ -114,13 +108,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext()
-
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Navbar />
       <Outlet />
       <Footer />
-    </QueryClientProvider>
+    </>
   )
 }

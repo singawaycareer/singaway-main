@@ -184,16 +184,29 @@ export function buildServiceListJsonLd() {
   }
 }
 
-export function buildBreadcrumbJsonLd() {
+/** Single JSON-LD payload — one script tag instead of five (faster parse, same SEO). */
+export function buildHomePageJsonLd() {
+  const organization = buildOrganizationJsonLd()
   return {
     '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
+    '@graph': [
+      organization,
       {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: SITE_URL,
+        ...buildWebSiteJsonLd(),
+        publisher: { '@id': `${SITE_URL}/#organization` },
+      },
+      buildFAQPageJsonLd(),
+      buildServiceListJsonLd(),
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: SITE_URL,
+          },
+        ],
       },
     ],
   }
@@ -266,9 +279,6 @@ export function buildPageMeta(options?: {
       { rel: 'canonical', href: canonical },
       { rel: 'icon', type: 'image/jpeg', href: '/og-image.jpg' },
       { rel: 'apple-touch-icon', href: '/og-image.jpg' },
-      { rel: 'alternate', href: canonical, hrefLang: 'en' },
-      { rel: 'sitemap', type: 'application/xml', href: '/sitemap.xml' },
-      { rel: 'author', href: `${SITE_URL}/llms.txt` },
     ],
   }
 }
